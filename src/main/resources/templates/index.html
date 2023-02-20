@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Page</title>
+</head>
+<body>
+<h1 th:text="#{welcome}">Index Page</h1>
+
+<table border="1px solid" class="table table-striped" id="vets">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Image</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rec : ${recipes}">
+        <td th:text="${rec.id}"></td>
+        <td th:text="${rec.getSource()}"></td>
+        <td th:text="${rec.description}"></td>
+        <td><img th:src="@{'data:image/jpeg;base64,'+ ${rec.encodedString}}" width="200px"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

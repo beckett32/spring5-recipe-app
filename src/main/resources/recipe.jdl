@@ -1,0 +1,62 @@
+application {
+  config {
+    baseName Recipe
+    packageName guru.springframework
+    applicationType monolith
+    enableHibernateCache true
+    buildTool maven
+    serverPort 8081
+    skipUserManagement true
+    authenticationType session
+  }
+}
+
+
+entity Recipe {
+  description String,
+  prepTime Integer,
+  cookTime Integer,
+  servings Integer,
+  source String,
+  url String,
+  directions String,
+  difficulty Difficulty,
+  image ImageBlob
+}
+
+entity Category {
+  name String
+}
+
+entity Ingredient {
+  description String,
+  amount BigDecimal
+}
+
+entity UnitOfMeasure {
+  description String
+}
+
+entity Notes {
+  notes String
+}
+
+enum Difficulty {
+  EASY,
+  MODERATE,
+  HARD
+}
+
+relationship OneToOne {
+  Recipe to Notes,
+  Ingredient to UnitOfMeasure
+}
+relationship OneToMany {
+  Ingredient to Recipe,
+  Recipe to Ingredient
+
+}
+
+relationship ManyToMany {
+  Recipe to Category
+}
